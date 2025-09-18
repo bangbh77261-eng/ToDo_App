@@ -6,17 +6,17 @@ import 'package:todo_app_sister/routers/app_router.dart';
 class LoginScreenUserController extends GetxController {
   TextEditingController userName = TextEditingController();
   TextEditingController userPassword = TextEditingController();
-     
+
   // Reactive variables for UI state
   var isLoading = false.obs;
   var errorMessage = ''.obs;
-     
+
   final SupabaseClient _supabase = Supabase.instance.client;
 
   // Login method with enhanced debugging
   Future<void> login() async {
     print('🚀 Starting login process...');
-    
+
     // Validate input
     if (userName.text.isEmpty || userPassword.text.isEmpty) {
       print('❌ Validation failed: Empty fields');
@@ -30,23 +30,25 @@ class LoginScreenUserController extends GetxController {
     try {
       isLoading.value = true;
       errorMessage.value = '';
-      
+
       print('🔍 Querying database...');
-      
+
       // Test connection first
       final testConnection = await _supabase
           .from('user_detail')
           .select('count')
           .count(CountOption.exact);
-      
-      print('✅ Database connection successful. Total users: ${testConnection.count}');
-      
+
+      print(
+        '✅ Database connection successful. Total users: ${testConnection.count}',
+      );
+
       // Query the user_detail table to check credentials
       print('🔎 Searching for user with username: ${userName.text.trim()}');
-      
+
       final response = await _supabase
           .from('user_detail')
-          .select('id, user_name, user_pasword')
+          .select('id, user_name, user_pasword,full_name,role')
           .eq('user_name', userName.text.trim())
           .eq('user_pasword', userPassword.text.trim())
           .maybeSingle();
@@ -56,22 +58,30 @@ class LoginScreenUserController extends GetxController {
       if (response != null) {
         print('✅ Login successful for user: ${response['user_name']}');
         _showSuccess('Đăng nhập thành công!');
-        
+
         // Store user session data
         await _storeUserSession(response);
-        
+
         // Navigate to home screen
-        Get.toNamed(Routes.HOME_SCREEN,arguments: userName.text);
+        Get.toNamed(
+          Routes.HOME_SCREEN,
+          arguments: {
+            'id': response['id'],
+            'full_name': response['full_name'],
+            'user_name': response['user_name'],
+            'role': response['role'],
+          },
+        );
       } else {
         print('❌ Login failed: No matching user found');
-        
+
         // Additional debug: Check if username exists
         final userCheck = await _supabase
             .from('user_detail')
             .select('user_name')
             .eq('user_name', userName.text.trim())
             .maybeSingle();
-        
+
         if (userCheck != null) {
           print('🔍 Username exists but password mismatch');
           _showError('Mật khẩu không đúng');
@@ -99,12 +109,12 @@ class LoginScreenUserController extends GetxController {
   Future<void> testConnection() async {
     try {
       print('🧪 Testing database connection...');
-      
+
       final response = await _supabase
           .from('user_detail')
           .select('id, user_name,full_name')
           .limit(5);
-      
+
       print('✅ Connection successful. Sample data: $response');
       _showSuccess('Kết nối database thành công!');
     } catch (e) {

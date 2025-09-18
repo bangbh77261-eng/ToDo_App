@@ -1,15 +1,23 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo_app_sister/network/config/CRUD_data.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:todo_app_sister/network/models/user.dart';
 
 class HomeScreenController extends GetxController {
-  late String userName;
+  late UserModel currentUser;
 
-    @override
-    void onInit() {
-      super.onInit();
-      userName = Get.arguments ?? "Lỗi";
-      print("👤 Nhận được username: $userName");
+  @override
+  void onInit() {
+    super.onInit();
+
+    // Lấy arguments từ màn hình trước (Login)
+    final args = Get.arguments as Map<String, dynamic>?;
+    if (args != null) {
+      currentUser = UserModel(
+        id: args['id'] ?? 0,
+        fullName: args['full_name'] ?? 'User',
+        userName: args['user_name'] ?? '',
+        role: args['role'] ?? 'No role',
+      );
     }
+  }
 }
