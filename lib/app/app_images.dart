@@ -6,5 +6,6 @@ class AppImages {
 
   // ==================== image ====================image_login_screen.jpg
   // static const String image_login = '$_imagePath/login_screen.jpg';
-  static const String image_login = '$_imagePath/login_screen.jpg';
+  static const String home_image = '$_imagePath/VN_Flag.svg';
+  static const String login_image = '$_imagePath/login_image.JPG';
 }
