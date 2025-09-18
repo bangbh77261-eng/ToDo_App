@@ -1,0 +1,9 @@
+{
+  "server_response_notify": "Can not found your data",
+  "login": "Login",
+  "close": "close",
+  "login_detail_leave": "Confirm your choice and go to Login Screen",
+  "dialog_header_content": "Login Message",
+  "user_name": "User Name",
+  "password": "Password"
+}

@@ -1,0 +1,9 @@
+{
+  "server_response_notify": "Không tìm thấy dữ liệu",
+  "login": "Đăng nhập",
+  "close": "Đóng",
+  "login_detail_leave": "Xác nhận chuyển đến màn hình đăng nhập",
+  "dialog_header_content": "Thông báo đăng nhập",
+  "user_name": "Tên đăng nhập",
+  "password": "Mật khẩu"
+}
