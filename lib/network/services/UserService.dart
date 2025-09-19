@@ -1,23 +1,22 @@
-import 'package:get/get.dart';
-import 'package:supabase_flutter/supabase_flutter.dart'; 
-import 'package:todo_app_sister/routers/app_router.dart';
-class UserService extends GetxService {
-  final SupabaseClient _supabase = Supabase.instance.client;
-  
-  Rx<Map<String, dynamic>?> currentUser = Rx<Map<String, dynamic>?>(null);
-  
-  Future<UserService> init() async {
-    return this;
-  }
-  
-  void setCurrentUser(Map<String, dynamic> userData) {
-    currentUser.value = userData;
-  }
-  
-  void logout() {
-    currentUser.value = null;
-    Get.offAllNamed(Routes.LOGIN_SCREEN);
-  }
-  
-  bool get isLoggedIn => currentUser.value != null;
-}
+// import 'package:todo_app_sister/network/config/CRUD_data.dart';
+// import 'package:todo_app_sister/network/models/user_detail.dart';
+
+// final userService = SupabaseCrudService<UserDetail>(
+//   tableName: 'user_detail',
+//   fromJson: (json) => UserDetail.fromJson(json),
+// );
+
+// // Gọi hàm
+// Future<void> exampleUser() async {
+//   final users = await userService.getAll();
+//   print('Users: $users');
+
+//   final user = await userService.getSingle('id', 1);
+//   print('User ID=1: $user');
+
+//   final newUser = await userService.create({
+//     'user_name': 'Bang',
+//     'user_password': '123456',
+//   });
+//   print('New user: $newUser');
+// }

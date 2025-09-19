@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:todo_app_sister/network/models/user.dart';
+import 'package:todo_app_sister/routers/app_router.dart';
 
 class HomeScreenController extends GetxController {
   late UserModel currentUser;
+  
+  // Thêm property cho navigation
+  var selectedIndex = 0.obs;
 
   @override
   void onInit() {
@@ -19,5 +23,14 @@ class HomeScreenController extends GetxController {
         role: args['role'] ?? 'No role',
       );
     }
+  }
+  
+  void changeTabIndex(int index) {
+    selectedIndex.value = index;
+    if(index == 0){
+      Get.toNamed(Routes.HOME_SCREEN);
+    }else if(index == 1){
+      Get.toNamed(Routes.HOME_SCREEN);
+    }    
   }
 }

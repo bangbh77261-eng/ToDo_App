@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-enum DateTimeFormat { dateTime, date, time, monthDay, api }
+enum DateTimeFormat { dateTime, date, time, monthDay, api, dateOnly }
 
 class DateUtil {
   DateUtil._();

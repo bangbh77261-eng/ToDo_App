@@ -11,7 +11,7 @@ class AppStyle {
     Color? color,
     double? fontSize,
     TextDecoration? decoration,
-    FontStyle? fontStyle,
+    FontStyle? fontStyle,  
   }) {
     return GoogleFonts.inter(
       color: color ?? AppColors.text,
@@ -34,6 +34,7 @@ class AppStyle {
       fontWeight: FontWeight.w400,
       decoration: decoration,
       fontStyle: fontStyle,
+      
     );
   }
 

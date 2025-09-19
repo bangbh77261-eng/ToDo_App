@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:todo_app_sister/app/app_images.dart';
 import 'package:todo_app_sister/app/app_style.dart';
 import 'package:todo_app_sister/modules/Home_Screen/Home_Screen_controller.dart';
+import 'package:todo_app_sister/routers/app_router.dart';
 import 'package:todo_app_sister/widget/widget_image.dart';
 
 class HomeScreenViews extends GetView<HomeScreenController> {
@@ -15,8 +16,7 @@ class HomeScreenViews extends GetView<HomeScreenController> {
       // appBar: AppBar(title: const Text("User List")),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: SafeArea(
-          child: Column(
+        child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _BuildHeader(),
@@ -32,13 +32,152 @@ class HomeScreenViews extends GetView<HomeScreenController> {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Text('Danh mục', style: AppStyle.bold()),
               ),
-              Gap(10),
               _BuildMenuList(),
             ],
           ),
-        ),
+        
       ),
+      // Bottom Navigation Bar được thêm vào đây
+      bottomNavigationBar: _BuildBottomNavigationBar(),
     );
+  }
+
+  Widget _BuildBottomNavigationBar() {
+    return Obx(() => Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(0, -2),
+          ),
+        ],
+      ),
+      child: BottomNavigationBar(
+        currentIndex: controller.selectedIndex.value,
+        onTap: (index) => controller.changeTabIndex(index),
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.grey,
+        selectedLabelStyle: AppStyle.regular().copyWith(
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+        ),
+        unselectedLabelStyle: AppStyle.regular().copyWith(
+          fontSize: 12,
+        ),
+        items: [
+          BottomNavigationBarItem(
+            icon: Container(
+              padding: EdgeInsets.all(4),
+              child: Icon(
+                Icons.home_outlined,
+                size: 24,
+              ),
+            ),
+            activeIcon: Container(
+              padding: EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                Icons.home,
+                size: 24,
+              ),
+            ),
+            label: 'Trang chủ',
+          ),
+          BottomNavigationBarItem(
+            icon: Container(
+              padding: EdgeInsets.all(4),
+              child: Icon(
+                Icons.event_outlined,
+                size: 24,
+              ),
+            ),
+            activeIcon: Container(
+              padding: EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                Icons.event,
+                size: 24,
+              ),
+            ),
+            label: 'Sự kiện',
+          ),
+          BottomNavigationBarItem(
+            icon: Container(
+              padding: EdgeInsets.all(4),
+              child: Icon(
+                Icons.task_outlined,
+                size: 24,
+              ),
+            ),
+            activeIcon: Container(
+              padding: EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                Icons.task,
+                size: 24,
+              ),
+            ),
+            label: 'Công việc',
+          ),
+          BottomNavigationBarItem(
+            icon: Container(
+              padding: EdgeInsets.all(4),
+              child: Icon(
+                Icons.notifications_outlined,
+                size: 24,
+              ),
+            ),
+            activeIcon: Container(
+              padding: EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                Icons.notifications,
+                size: 24,
+              ),
+            ),
+            label: 'Thông báo',
+          ),
+          BottomNavigationBarItem(
+            icon: Container(
+              padding: EdgeInsets.all(4),
+              child: Icon(
+                Icons.person_outline,
+                size: 24,
+              ),
+            ),
+            activeIcon: Container(
+              padding: EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                Icons.person,
+                size: 24,
+              ),
+            ),
+            label: 'Cá nhân',
+          ),
+        ],
+      ),
+    ));
   }
 
   Widget _BuildHeader() {
@@ -48,7 +187,7 @@ class HomeScreenViews extends GetView<HomeScreenController> {
       children: [
         Expanded(
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 20),
+            padding: EdgeInsets.symmetric(vertical: 40),
             decoration: BoxDecoration(
               color: Colors.red,
               borderRadius: BorderRadius.only(
@@ -196,6 +335,67 @@ class HomeScreenViews extends GetView<HomeScreenController> {
   }
 
   Widget _BuildMenuList() {
-    return Wrap(children: [Container()]);
+    return Wrap(
+      children: [
+        Row(
+          children: [
+            _BuildCells('Bệnh nhân',(){
+              Get.toNamed(Routes.CUSTOMER_DETAIL);
+            },Icons.person
+            ),
+             _BuildCells('Bệnh nhân',(){
+              Get.toNamed(Routes.HOME_SCREEN);
+            },Icons.person
+            ),
+            _BuildCells('Bệnh nhân',(){
+              Get.toNamed(Routes.HOME_SCREEN);
+            },Icons.person
+            ),
+          ],
+        ),
+        // Row(
+        //   children: [
+        //     _BuildCells(),
+        //     _BuildCells(),
+        //     _BuildCells(),
+        //   ],
+        // ),
+      ],
+    );
+  }
+
+  Widget _BuildCells(
+    String title,VoidCallback Actions,IconData icon
+  ) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: Actions,
+        child: Container(
+          height: Get.height*0.1,
+          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(0, -2),
+            ),
+            ]
+          ),
+          child: Column(
+            children: [
+              Gap(10),
+              Icon(icon),
+              Gap(10),
+              Text(title,style: AppStyle.bold().copyWith(color: Colors.grey,fontSize: 12),),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
