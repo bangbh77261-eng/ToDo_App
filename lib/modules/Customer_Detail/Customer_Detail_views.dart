@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gap/gap.dart';
-import 'package:todo_app_sister/app/app_images.dart';
+
 import 'package:todo_app_sister/app/app_style.dart';
 import 'package:todo_app_sister/modules/Customer_Detail/Customer_Detail_controller.dart';
-import 'package:todo_app_sister/modules/Home_Screen/Home_Screen_controller.dart';
 import 'package:todo_app_sister/routers/app_router.dart';
 import 'package:todo_app_sister/widget/Button_circle_icon.dart';
 import 'package:todo_app_sister/widget/Text_Field.dart';
 import 'package:todo_app_sister/widget/Widget_button.dart';
-import 'package:todo_app_sister/widget/widget_image.dart';
 
 class CustomerDetailViews extends GetView<CustomerDetailController> {
   const CustomerDetailViews({super.key});

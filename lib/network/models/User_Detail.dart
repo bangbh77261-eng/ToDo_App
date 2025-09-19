@@ -1,5 +1,3 @@
-import 'package:todo_app_sister/utils/date_util.dart';
-
 class CustomerDetail {
   final int id;
   final DateTime createdAt;

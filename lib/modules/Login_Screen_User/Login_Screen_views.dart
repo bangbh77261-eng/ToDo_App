@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gap/gap.dart';
-import 'package:todo_app_sister/app/app_images.dart';
 import 'package:todo_app_sister/app/app_style.dart';
 import 'package:todo_app_sister/modules/Login_Screen_User/Login_Screen_controller.dart';
-import 'package:todo_app_sister/routers/app_router.dart';
 import 'package:todo_app_sister/widget/Text_Field.dart';
 import 'package:todo_app_sister/widget/Text_Field_password.dart';
 import 'package:todo_app_sister/widget/Widget_button.dart';
-import 'package:todo_app_sister/widget/widget_image.dart';
 
 class LoginScreenUserViews extends GetView<LoginScreenUserController> {
   const LoginScreenUserViews({super.key});

@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+// ignore: depend_on_referenced_packages
 import 'package:gap/gap.dart';
-import 'package:todo_app_sister/app/app_images.dart';
 import 'package:todo_app_sister/app/app_style.dart';
 import 'package:todo_app_sister/modules/Contact_Customer/Contact_Customer_controller.dart';
-import 'package:todo_app_sister/modules/Customer_Detail/Customer_Detail_controller.dart';
-import 'package:todo_app_sister/modules/Home_Screen/Home_Screen_controller.dart';
-import 'package:todo_app_sister/routers/app_router.dart';
 import 'package:todo_app_sister/widget/Button_circle_icon.dart';
 import 'package:todo_app_sister/widget/Text_Field.dart';
-import 'package:todo_app_sister/widget/Widget_button.dart';
-import 'package:todo_app_sister/widget/widget_image.dart';
 
 class ContactCustomerViews extends GetView<ContactCustomerController> {
   const ContactCustomerViews({super.key});
@@ -37,6 +32,7 @@ class ContactCustomerViews extends GetView<ContactCustomerController> {
       ),    
     );
   }
+  // ignore: non_constant_identifier_names
   Widget _BuildHeader() {
   return Row(
     children: [
@@ -75,6 +71,7 @@ class ContactCustomerViews extends GetView<ContactCustomerController> {
     ],
   );
 }
+  // ignore: non_constant_identifier_names
   Widget _BuildCustomerDetail(){
      final customer = controller.customer!;
     return Padding(
@@ -143,9 +140,7 @@ class ContactCustomerViews extends GetView<ContactCustomerController> {
                 children: [
                   Expanded(child: Text(header,style: AppStyle.regular(),)),
                    Text(
-                    detail != null 
-                      ? '${detail}' 
-                      : 'Chưa có địa chỉ',
+                    detail,
                     style: AppStyle.bold(),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -165,12 +160,12 @@ class ContactCustomerViews extends GetView<ContactCustomerController> {
         Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
+                  SizedBox(
                     width: Get.width*0.4,
                     child: Text(header,style: AppStyle.regular(),)),
                    Expanded(
                       child: Text(
-                        detail ?? 'Chưa có địa chỉ',
+                        detail,
                         style: AppStyle.bold(),
                         textAlign: TextAlign.right,
                         maxLines: 2,

@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:todo_app_sister/network/models/user.dart';
 import 'package:todo_app_sister/routers/app_router.dart';
 
